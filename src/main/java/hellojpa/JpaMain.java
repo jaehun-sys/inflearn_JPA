@@ -9,10 +9,10 @@ public class JpaMain {
     public static void main(String[] main){
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("hello");
 
-        EntityManager em = emf.createEntityManager();
+        EntityManager em = emf.createEntityManager();   //쉽게 이해하자면 DB Connection을 하나 만든 것.
 
         EntityTransaction tx = em.getTransaction(); //트랜잭션
-        tx.begin();
+        tx.begin(); //트랜잭션 시작
 
         try {
             //영속
@@ -37,7 +37,7 @@ public class JpaMain {
             System.out.println("=====================");
             tx.commit();
         } catch (Exception e) {
-            tx.rollback();
+            tx.rollback();  //문제가 생겼을 시 롤백.
         } finally {
             em.close();
         }
