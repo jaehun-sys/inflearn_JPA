@@ -14,9 +14,11 @@ public class JpaMain {
         EntityTransaction tx = em.getTransaction(); //트랜잭션
         tx.begin(); //트랜잭션 시작
 
+        // try-catch로 정석적인 예외 처리를 함. -> 이 역할은 이제 Spring이 해줌.
         try {
             //영속
-            Member member = em.find(Member.class, 1L);
+            Member member = em.find(Member.class, 1L);  // em: 객체를 대신 저장해주는 역할. 첫 번째 파라미터 : 엔터티클래스, 두 번째 파라미터 : PK
+            //em.remove : delete 쿼리 나가면서 삭제
             member.setName("AAAAA");
 
             //em.close();   //영속성 컨텍스트 종료
