@@ -4,6 +4,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import java.util.List;
 
 public class JpaMain {
     public static void main(String[] main){
@@ -17,9 +18,16 @@ public class JpaMain {
         // try-catch로 정석적인 예외 처리를 함. -> 이 역할은 이제 Spring이 해줌.
         try {
             //영속
-            Member member = em.find(Member.class, 1L);  // em: 객체를 대신 저장해주는 역할. 첫 번째 파라미터 : 엔터티클래스, 두 번째 파라미터 : PK
+            Member findMember = em.find(Member.class, 1L);  // em: 객체를 대신 저장해주는 역할. 첫 번째 파라미터 : 엔터티클래스, 두 번째 파라미터 : PK
             //em.remove : delete 쿼리 나가면서 삭제
-            member.setName("AAAAA");
+            findMember.setName("AAAAA");
+
+            List<Member> result = em.createQuery( "select m  from Member", Member.class)        // JPQL : 직접 쿼리를 칠 수 있다. Member 엔티티를 타겟.
+                    .getResultList();
+
+            for (Member member : result) {
+                System.out.println("member = " + member.getName());
+            }
 
             //em.close();   //영속성 컨텍스트 종료
             //em.clear();   //영속성 컨텍스트 다 날리기 : 1차캐시 다 지움
