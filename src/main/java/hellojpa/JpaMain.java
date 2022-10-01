@@ -29,21 +29,6 @@ public class JpaMain {
                 System.out.println("member = " + member.getName());
             }
 
-            //em.close();   //영속성 컨텍스트 종료
-            //em.clear();   //영속성 컨텍스트 다 날리기 : 1차캐시 다 지움
-            //em.detach(member);  //준영속
-
-            //flush
-            //Member memberF = new Member(200L, "member200");
-            //em.persist(memberF);
-            //em.flush();
-
-            //Member member = new Member();
-            //member.setId(2L);
-            //member.setName("HelloB");
-
-            //em.persist(member);
-
             System.out.println("=====================");
             tx.commit();
         } catch (Exception e) {
