@@ -23,6 +23,8 @@ public class JpaMain {
             findMember.setName("AAAAA");
 
             List<Member> result = em.createQuery( "select m  from Member", Member.class)        // JPQL : 직접 쿼리를 칠 수 있다. Member 엔티티를 타겟.
+                    .setFirstResult(1)
+                    .setMaxResults(10)  // 1~10행 가져와.(Pagination)
                     .getResultList();
 
             for (Member member : result) {
