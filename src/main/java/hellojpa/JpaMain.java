@@ -22,7 +22,7 @@ public class JpaMain {
             //em.remove : delete 쿼리 나가면서 삭제
             findMember.setName("AAAAA");
 
-            List<Member> result = em.createQuery( "select m  from Member", Member.class)        // JPQL : 직접 쿼리를 칠 수 있다. Member 엔티티를 타겟.
+            List<Member> result = em.createQuery( "select m  from Member as m", Member.class)        // JPQL : 직접 쿼리를 칠 수 있다. Member 엔티티를 타겟.
                     .setFirstResult(1)
                     .setMaxResults(10)  // 1~10행 가져와.(Pagination)
                     .getResultList();
